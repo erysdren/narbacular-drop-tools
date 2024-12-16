@@ -1,5 +1,7 @@
 # Narbacular Drop (2005) Tools
 
+![](/.github/trenchbroom.png)
+
 Some tools for working with the files and formats from Narbacular Drop (2005).
 
 The Python tools require the [Kaitai Struct Python Runtime](https://github.com/kaitai-io/kaitai_struct_python_runtime).
