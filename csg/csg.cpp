@@ -130,7 +130,7 @@ Header:
 	//
 	memset ( acBuffer, 0, MAX_TOKEN_LENGTH + 1 );
 
-	for ( i = 0; i < strlen ( pWAD ) + 1; i++ )
+	for ( int i = 0; i < strlen ( pWAD ) + 1; i++ )
 	{
 		if ( ( pWAD[ i ] == ';' ) || ( pWAD[ i ] == 0x00 ) )
 		{
@@ -151,7 +151,7 @@ Header:
 	//
 	pTexture = pTextures_;
 
-	for ( i = 0; i < uiTextures; i++ )
+	for ( int i = 0; i < uiTextures; i++ )
 	{
 		ofsFile << pTexture->name << ( char )0x00;
 
@@ -175,7 +175,7 @@ Header:
 // Description:	Program to load, parse, CSG union, and save
 //				WorldCraft 3.3 .MAP files as .CMF files.
 ////////////////////////////////////////////////////////////////////
-void main ( int nArgs_, char *pcArgs[ ] )
+int main ( int nArgs_, char *pcArgs[ ] )
 {
 	//
 	// If in debug mode, turn on memory leak checking
@@ -198,7 +198,7 @@ void main ( int nArgs_, char *pcArgs[ ] )
 		cout << "in\t- MAP file" << endl;
 		cout << "out\t- CMF file" << endl;
 
-		return;
+		return 0;
 	}
 
 
@@ -214,7 +214,7 @@ void main ( int nArgs_, char *pcArgs[ ] )
 	{
 		cout << "Error parsing " << pcArgs[ 1 ] << "!" << endl;
 
-		return;
+		return 1;
 	}
 
 
@@ -273,5 +273,5 @@ void main ( int nArgs_, char *pcArgs[ ] )
 	delete pEntities;
 	delete pTextures;
 
-	return;
+	return 0;
 }

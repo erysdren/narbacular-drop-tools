@@ -1,5 +1,6 @@
 #pragma once
 
+
 ////////////////////////////////////////////////////////////////////
 // Constants
 ////////////////////////////////////////////////////////////////////
@@ -16,6 +17,8 @@ const unsigned int MAX_TEXTURE_LENGTH	= 16;
 #include <fstream>
 
 using namespace std;
+
+#include <windows.h>
 
 #include "math.h"
 #include "entity.h"

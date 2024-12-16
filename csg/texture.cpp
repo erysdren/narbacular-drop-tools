@@ -8,14 +8,14 @@
 
 Texture* Texture::GetTexture ( char *pacTexture_, LPVOID lpView_, DWORD dwFileSize_, Texture::eGT &rResult_ )
 {
-	rResult_ = eGT::GT_ERROR;
+	rResult_ = GT_ERROR;
 
 	//
 	// Check if texture already exists
 	//
 	if ( stricmp ( name, pacTexture_ ) == 0 )
 	{
-		rResult_ = eGT::GT_FOUND;
+		rResult_ = GT_FOUND;
 
 		return this;
 	}
@@ -124,7 +124,7 @@ Texture* Texture::GetTexture ( char *pacTexture_, LPVOID lpView_, DWORD dwFileSi
 
 	m_pNext = pTexture;
 
-	rResult_ = eGT::GT_LOADED;
+	rResult_ = GT_LOADED;
 
 	return pTexture;
 }

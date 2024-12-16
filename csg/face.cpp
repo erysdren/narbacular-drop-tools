@@ -1,6 +1,5 @@
 #include "map.h"
 
-
 ////////////////////////////////////////////////////////////////////
 // Face member functions
 ////////////////////////////////////////////////////////////////////
@@ -79,7 +78,7 @@ Poly *Face::GetPolys ( )
 
 					while ( true )
 					{
-						if ( f->plane.ClassifyPoint ( p ) == Plane::eCP::FRONT )
+						if ( f->plane.ClassifyPoint ( p ) == Plane::FRONT )
 						{
 							break;
 						}

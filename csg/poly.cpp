@@ -85,12 +85,12 @@ Poly *Poly::ClipToList ( Poly *pPoly_, bool bClipOnPlane_ )
 {
 	switch ( ClassifyPoly ( pPoly_ ) )
 	{
-	case eCP::FRONT:
+	case FRONT:
 		{
 			return pPoly_->CopyPoly ( );
 		} break;
 
-	case eCP::BACK:
+	case BACK:
 		{
 			if ( IsLast ( ) )
 			{
@@ -100,7 +100,7 @@ Poly *Poly::ClipToList ( Poly *pPoly_, bool bClipOnPlane_ )
 			return m_pNext->ClipToList ( pPoly_, bClipOnPlane_ );
 		} break;
 
-	case eCP::ONPLANE:
+	case ONPLANE:
 		{
 			double	Angle = plane.n.Dot ( pPoly_->plane.n ) - 1;
 
@@ -120,7 +120,7 @@ Poly *Poly::ClipToList ( Poly *pPoly_, bool bClipOnPlane_ )
 			return m_pNext->ClipToList ( pPoly_, bClipOnPlane_ );
 		} break;
 
-	case eCP::SPLIT:
+	case SPLIT:
 		{
 			Poly *pFront	= NULL;
 			Poly *pBack		= NULL;
@@ -214,7 +214,7 @@ Poly::eCP Poly::ClassifyPoly ( Poly *pPoly_ )
 		{
 			if ( bBack )
 			{
-				return eCP::SPLIT;
+				return SPLIT;
 			}
 
 			bFront = true;
@@ -223,7 +223,7 @@ Poly::eCP Poly::ClassifyPoly ( Poly *pPoly_ )
 		{
 			if ( bFront )
 			{
-				return eCP::SPLIT;
+				return SPLIT;
 			}
 
 			bBack = true;
@@ -232,14 +232,14 @@ Poly::eCP Poly::ClassifyPoly ( Poly *pPoly_ )
 
 	if ( bFront )
 	{
-		return eCP::FRONT;
+		return FRONT;
 	}
 	else if ( bBack )
 	{
-		return eCP::BACK;
+		return BACK;
 	}
 
-	return eCP::ONPLANE;
+	return ONPLANE;
 }
 
 
@@ -266,24 +266,24 @@ void Poly::SplitPoly ( Poly *pPoly_, Poly **ppFront_, Poly **ppBack_ )
 	pFront->plane		= pPoly_->plane;
 	pBack->plane		= pPoly_->plane;
 
-	for ( i = 0; i < pPoly_->GetNumberOfVertices ( ); i++ )
+	for ( int i = 0; i < pPoly_->GetNumberOfVertices ( ); i++ )
 	{
 		//
 		// Add point to appropriate list
 		//
 		switch ( pCP[ i ] )
 		{
-		case Plane::eCP::FRONT:
+		case Plane::FRONT:
 			{
 				pFront->AddVertex ( pPoly_->verts[ i ] );
 			} break;
 
-		case Plane::eCP::BACK:
+		case Plane::BACK:
 			{
 				pBack->AddVertex ( pPoly_->verts[ i ] );
 			} break;
 
-		case Plane::eCP::ONPLANE:
+		case Plane::ONPLANE:
 			{
 				pFront->AddVertex ( pPoly_->verts[ i ] );
 				pBack->AddVertex ( pPoly_->verts[ i ] );
@@ -301,11 +301,11 @@ void Poly::SplitPoly ( Poly *pPoly_, Poly **ppFront_, Poly **ppBack_ )
 			iNext = 0;
 		}
 
-		if ( ( pCP[ i ] == Plane::eCP::ONPLANE ) && ( pCP[ iNext ] != Plane::eCP::ONPLANE ) )
+		if ( ( pCP[ i ] == Plane::ONPLANE ) && ( pCP[ iNext ] != Plane::ONPLANE ) )
 		{
 			bIgnore = true;
 		}
-		else if ( ( pCP[ iNext ] == Plane::eCP::ONPLANE ) && ( pCP[ i ] != Plane::eCP::ONPLANE ) )
+		else if ( ( pCP[ iNext ] == Plane::ONPLANE ) && ( pCP[ i ] != Plane::ONPLANE ) )
 		{
 			bIgnore = true;
 		}
@@ -365,7 +365,7 @@ void Poly::CalculateTextureCoordinates ( int texWidth, int texHeight, Plane texA
 	bool	bDoU = true;
 	bool	bDoV = true;
 
-	for ( i = 0; i < GetNumberOfVertices ( ); i++ )
+	for ( int i = 0; i < GetNumberOfVertices ( ); i++ )
 	{
 		if ( ( verts[ i ].tex[ 0 ] < 1 ) && ( verts[ i ].tex[ 0 ] > -1 ) )
 		{
@@ -413,7 +413,7 @@ void Poly::CalculateTextureCoordinates ( int texWidth, int texHeight, Plane texA
 			}
 		}
 
-		for ( i = 0; i < GetNumberOfVertices ( ); i++ )
+		for ( int i = 0; i < GetNumberOfVertices ( ); i++ )
 		{
 			if ( bDoU )
 			{
@@ -453,7 +453,7 @@ void Poly::CalculateTextureCoordinates ( int texWidth, int texHeight, Plane texA
 		//
 		// Normalize texture coordinates
 		//
-		for ( i = 0; i < GetNumberOfVertices ( ); i++ )
+		for ( int i = 0; i < GetNumberOfVertices ( ); i++ )
 		{
 			verts[ i ].tex[ 0 ] = verts[ i ].tex[ 0 ] - NearestU;
 			verts[ i ].tex[ 1 ] = verts[ i ].tex[ 1 ] - NearestV;
@@ -479,7 +479,7 @@ void Poly::SortVerticesCW ( )
 	//
 	// Sort vertices
 	//
-	for ( i = 0; i < GetNumberOfVertices ( ) - 2; i++ )
+	for ( int i = 0; i < GetNumberOfVertices ( ) - 2; i++ )
 	{
 		Vector3	a;
 		Plane	p;
@@ -493,7 +493,7 @@ void Poly::SortVerticesCW ( )
 
 		for ( int j = i + 1; j < GetNumberOfVertices ( ); j++ )
 		{
-			if ( p.ClassifyPoint ( verts[ j ].p ) != Plane::eCP::BACK )
+			if ( p.ClassifyPoint ( verts[ j ].p ) != Plane::BACK )
 			{
 				Vector3	b;
 				double	Angle;
@@ -564,7 +564,7 @@ bool Poly::CalculatePlane ( )
     centerOfMass.y	= 0.0f; 
     centerOfMass.z	= 0.0f;
 
-    for ( i = 0; i < GetNumberOfVertices ( ); i++ )
+    for ( int i = 0; i < GetNumberOfVertices ( ); i++ )
     {
         j = i + 1;
 

@@ -263,7 +263,7 @@ MAPFile::Result MAPFile::ParseFace ( Face **ppFace_ )
 		{
 			pTexture = m_pTextureList->GetTexture ( m_acToken, m_pWAD[ iWAD ], m_pWADSize[ iWAD ], Result );
 
-			if ( Result == Texture::eGT::GT_LOADED )
+			if ( Result == Texture::GT_LOADED )
 			{
 				pTexture->uiID = ( unsigned int )m_iTextures;
 				m_iTextures++;
@@ -288,7 +288,7 @@ MAPFile::Result MAPFile::ParseFace ( Face **ppFace_ )
 		{
 			pTexture = m_pTextureList->GetTexture ( m_acToken, m_pWAD[ iWAD ], m_pWADSize[ iWAD ], Result );
 
-			if ( Result == Texture::eGT::GT_LOADED )
+			if ( Result == Texture::GT_LOADED )
 			{
 				//
 				// Texture had to be loaded from the WAD file
@@ -298,7 +298,7 @@ MAPFile::Result MAPFile::ParseFace ( Face **ppFace_ )
 
 				bFound = true;
 			}
-			else if ( Result == Texture::eGT::GT_FOUND )
+			else if ( Result == Texture::GT_FOUND )
 			{
 				//
 				// Texture was already in texture list
@@ -327,7 +327,7 @@ MAPFile::Result MAPFile::ParseFace ( Face **ppFace_ )
 	//
 	// Read texture axis
 	//
-	for ( i = 0; i < 2; i++ )
+	for ( int i = 0; i < 2; i++ )
 	{
 		Plane p;
 
