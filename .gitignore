@@ -3,3 +3,4 @@ __pycache__/
 tools/kaitaistruct.py
 tools/ore.py
 tools/cmf.py
+untracked/
