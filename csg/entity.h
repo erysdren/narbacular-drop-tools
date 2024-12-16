@@ -68,7 +68,7 @@ public:
 	void SortVerticesCW ( );
 	void ToLeftHanded ( );
 	void CalculateTextureCoordinates ( int texWidth, int texHeight, Plane texAxis[ 2 ], double texScale[ 2 ] );
-	void Poly::SplitPoly ( Poly *pPoly_, Poly **ppFront_, Poly **ppBack_ );
+	void SplitPoly ( Poly *pPoly_, Poly **ppFront_, Poly **ppBack_ );
 	eCP ClassifyPoly ( Poly *pPoly_ );
 
 	bool IsLast ( ) const;
