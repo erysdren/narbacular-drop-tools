@@ -4,3 +4,4 @@ tools/kaitaistruct.py
 tools/ore.py
 tools/cmf.py
 untracked/
+*.compile.map
