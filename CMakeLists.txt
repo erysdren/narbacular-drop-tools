@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.15)
 project(narbacular-drop-tools LANGUAGES CXX)
 
+if(NOT WIN32)
+	message(FATAL_ERROR "This program only can only be built for Windows!")
+endif()
+
 add_executable(csg
 	${PROJECT_SOURCE_DIR}/csg/brush.cpp
 	${PROJECT_SOURCE_DIR}/csg/csg.cpp
