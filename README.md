@@ -7,6 +7,7 @@ The Python tools require the [Kaitai Struct Python Runtime](https://github.com/k
 ## Directory
 
 - [`csg`](/csg/): Stefan Hajnoczi's CMF compiler modified for Narbacular Drop.
+(note: currently only compiles for Windows)
 - [`formats`](/formats/): Kaitai Struct definitions for Narbacular Drop files.
 - [`tools`](/tools/): Various Python tools for working with Narbacular Drop.
 
