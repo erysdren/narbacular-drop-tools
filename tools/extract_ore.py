@@ -5,8 +5,8 @@ import sys
 from pathlib import Path
 from ore import Ore
 
+# default filename for the one in Narbacular Drop
 orefilename = "File.ore"
-
 if len(sys.argv) > 1:
 	orefilename = sys.argv[1]
 
