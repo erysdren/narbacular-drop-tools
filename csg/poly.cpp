@@ -88,7 +88,7 @@ Poly *Poly::ClipToList ( Poly *pPoly_, bool bClipOnPlane_ )
 	case FRONT:
 		{
 			return pPoly_->CopyPoly ( );
-		} break;
+		};
 
 	case BACK:
 		{
@@ -98,7 +98,7 @@ Poly *Poly::ClipToList ( Poly *pPoly_, bool bClipOnPlane_ )
 			}
 
 			return m_pNext->ClipToList ( pPoly_, bClipOnPlane_ );
-		} break;
+		};
 
 	case ONPLANE:
 		{
@@ -118,7 +118,7 @@ Poly *Poly::ClipToList ( Poly *pPoly_, bool bClipOnPlane_ )
 			}
 
 			return m_pNext->ClipToList ( pPoly_, bClipOnPlane_ );
-		} break;
+		};
 
 	case SPLIT:
 		{
@@ -157,7 +157,7 @@ Poly *Poly::ClipToList ( Poly *pPoly_, bool bClipOnPlane_ )
 			pFront->AddPoly ( pBackFrags );
 
 			return pFront;
-		} break;
+		};
 	}
 
 	return NULL;
@@ -564,7 +564,7 @@ bool Poly::CalculatePlane ( )
     centerOfMass.y	= 0.0f; 
     centerOfMass.z	= 0.0f;
 
-    for ( int i = 0; i < GetNumberOfVertices ( ); i++ )
+    for ( i = 0; i < GetNumberOfVertices ( ); i++ )
     {
         j = i + 1;
 
