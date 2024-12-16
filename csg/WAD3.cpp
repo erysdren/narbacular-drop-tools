@@ -119,11 +119,8 @@ void MapFile( LPCTSTR szFileName, LPVOID *pView, LPDWORD pdwFileSize )
 	}
 }
 
-int CorruptWAD3( LPCTSTR szErrorMessage, LPVOID lpView)
+void CorruptWAD3( LPCTSTR szErrorMessage, LPVOID lpView)
 {
 	UnmapViewOfFile( lpView);
 	throw CWADException( szErrorMessage);
-
-	// We never actually get here, but oh well
-	return 1;
 }

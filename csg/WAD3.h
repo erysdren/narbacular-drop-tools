@@ -62,7 +62,7 @@ typedef struct
 } WAD3_MIP, *LPWAD3_MIP;
 
 extern void MapFile( LPCTSTR szFileName, LPVOID *pView, LPDWORD pdwFileSize);
-extern int CorruptWAD3( LPCTSTR szErrorMessage, LPVOID lpView);
+extern void CorruptWAD3( LPCTSTR szErrorMessage, LPVOID lpView);
 
 class CWADException
 {
