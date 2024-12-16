@@ -977,7 +977,7 @@ MAPFile::Result MAPFile::GetToken ( )
 	char			c		= 0;
 	DWORD			dwRead	= 0;
 
-	memset ( &m_acToken, 0, sizeof ( m_acToken ) );
+	memset ( m_acToken, 0, sizeof ( m_acToken ) );
 
 	while ( i <= MAX_TOKEN_LENGTH )
 	{
@@ -1025,7 +1025,7 @@ MAPFile::Result MAPFile::GetString ( )
 	bool			bFinished	= false;
 	DWORD			dwRead		= 0;
 
-	memset ( &m_acToken, 0, sizeof ( m_acToken ) );
+	memset ( m_acToken, 0, sizeof ( m_acToken ) );
 
 	//
 	// Read first "
