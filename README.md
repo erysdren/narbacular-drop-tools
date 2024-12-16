@@ -10,7 +10,7 @@ The Python tools require the [Kaitai Struct Python Runtime](https://github.com/k
 (note: currently only compiles for Windows)
 - [`formats`](/formats/): Kaitai Struct definitions for Narbacular Drop files.
 - [`levels`](/levels/): The original levels converted for use with TrenchBroom.
-- [`Narbacular Drop`](/Narbacular\ Drop/): TrenchBroom configuration for
+- [`Narbacular Drop`](/Narbacular%20Drop/): TrenchBroom configuration for
 Narbacular Drop. To use, place this folder in your TrenchBroom games directory.
 - [`sprites`](/sprites/): Editor sprites for use with TrenchBroom.
 - [`tools`](/tools/): Various Python tools for working with Narbacular Drop.
