@@ -1,0 +1,253 @@
+///////////////////////////////////////////////////////////
+//
+// Narbacular Drop game definition file (.fgd) 
+// Version 1.1
+// For Worldcraft 3.4 and above
+// Last Update: August 31st 2006
+//
+// http://www.nuclearmonkeysoftware.com
+// email us with improvements and suggestions
+//
+// special thanks to: stefanha
+//
+// modified by Steve
+//
+////////////////
+// LEGAL TIPS //
+////////////////
+//
+// Most content copyright © DigiPen Institute of Technology 2004
+//
+// Nuclear Monkey Software is a team of 4 Senior Developers and 
+// Narbacular Drop is their senior project.
+//
+// Kim Swift, Garret Rickey, Dave Kircher, and Jeep Barnett put
+// somewhere between 1000 and 100,000,000 man hours into ND.
+// Freely distribute it and these level building tools, but 
+// GIVE US CREDIT!! :D
+//
+// Thanks for your time... enjoy... etc...
+//
+///////////////////////////////////////////////////////////
+
+//
+// worldspawn
+//
+
+@SolidClass = worldspawn : "World entity"
+[
+	message(string) : "Room Name / Title" : ""
+	console_command(string) : "Console Command" : ""
+]
+
+//
+// BaseClasses
+//
+
+@BaseClass = Targetname 
+[ 
+	targetname(target_source) : "Name"
+]
+@BaseClass = Target 
+[ 
+	target(target_destination) : "Target" 
+]
+@BaseClass = Axis
+[
+	axis_choice(choices) : "Axis Choice" : 0 = 
+	[
+		0 : "X (East)"
+		1 : "-X (West)"
+		2 : "Y (North)"
+		3 : "-Y (South)"
+		4 : "Z (Up)"
+		5 : "-Z (Down)"
+	]
+]
+@BaseClass = BackwardsAxis
+[
+	axis_choice(choices) : "Axis Choice" : 0 = 
+	[
+		1 : "X (East)"
+		0 : "-X (West)"
+		3 : "Y (North)"
+		2 : "-Y (South)"
+		5 : "Z (Up)"
+		4 : "-Z (Down)"
+	]
+]
+@BaseClass = Vector3
+[
+	_x(string) : "X (East/West)" : "0.0"
+	_z(string) : "-Y (South/North)" : "0.0"
+	_y(string) : "Z (Up/Down)" : "0.0"
+]
+@BaseClass = RGBColor
+[
+	_r(string) : "Red Amount" : "0.0"
+	_g(string) : "Green Amount" : "0.0"
+	_b(string) : "Blue Amount" : "0.0"
+]
+
+//
+// Solid Entities
+//
+
+@SolidClass base(Target,Targetname) = area_trigger : "Trigger Area"
+[
+	waitthreshold(string) : "Touch Time Threshold" : "0.0"
+	spawnflags(flags) =
+	[
+		1: "Only once" : 0
+	]
+]
+
+
+@SolidClass = collidable_geometry : "Collidable Geometry"
+[
+	spawnflags(flags) =
+	[
+		1: "Portals ignore" : 0
+		2: "Double sided" : 0
+	]
+	sfx_type(Choices) : "Material type" : 0 =
+	[
+		0 : "Dirt (portalable)"
+		1 : "Metal (no portals)"
+		2 : "Chainlink (no portals)"
+	]
+]
+
+@SolidClass base(Targetname) = func_lava : "Lava" 
+[
+]
+
+@SolidClass base(Axis) = func_wall : "Wall"
+[
+	wall_type(Choices) : "Material type" : 0 =
+	[
+		0 : "Dirt (portalable)"
+		1 : "Metal (no portals)"
+	]
+]
+
+//
+// Point Entities
+//
+
+@PointClass iconsprite("sprites/speaker.png") base(Targetname) = ambient_sound : "Ambient Sound"
+[
+	filename(string) : "Path/filename.wav of WAV"
+	volume(integer) : "Volume (255 = loudest)" : 255
+	pitch(string) : "Pitch 1.0 = normal" : "1.0"
+	mindistance(string) : "Falloff start" : "32.0"
+	radius(string) : "Radius" : "1024.0"
+	spawnflags(flags) =
+	[
+		1:"Start Silent":0
+		2:"Is NOT Looped":0
+	]
+]
+@PointClass base(Axis) iconsprite("sprites/wallyblue.png") size(-64 -64 -128, 64 64 128) color(0 0 255) = blue_portal : "Blue Portal"
+[
+]
+@PointClass base(Axis) size(-96 -96 -96, 96 96 96) color(0 255 0) = boulder : "Boulder"
+[
+	speed(integer) : "Speed" : 3
+]
+@PointClass base(Axis,Targetname) size(-96 -96 -96, 96 96 96) color(0 255 200) = boulder_spawn: "Boulder Spawn"
+[
+	spawn_rate(integer) : "Spawn Gap (secs)" : 15
+	num_boulders(integer) : "Number of Boulders" : 10
+]
+@PointClass base(Target, Axis) size(-16 -16 0, 16 16 16) color(255 0 0) = button_standard : "Standard Button"
+[
+	spawnflags(flags) =
+	[
+		1: "Only once" : 0
+	]
+	weight_needed(integer) : "Weight Needed" : 100
+]
+@PointClass iconsprite("sprites/camera.png") base(Targetname) color(0 255 255) = camera : "Camera"
+[
+	spawnflags(flags) =
+	[
+		1: "Don't Transition" : 0
+	]
+]
+@PointClass iconsprite("sprites/counter.png") base(Targetname,Target) size(-16 -16 -16, 16 16 16) = counter : "Counter"
+[
+	threshold(integer) : "Threshold"
+]
+@PointClass size(-16 -16 -16, 16 16 16) color(0 255 0) = crate : "Crate"
+[
+	weight(integer) : "Weight" : 100
+	scale(string) : "Size Scale" : 5
+]
+@PointClass size(-64 -64 -128, 64 64 128) color(0 255 0) = demon : "Demon"
+[
+	spawnflags(Flags) = [ 1 : "Showcase" : 0 ]
+]
+@PointClass iconsprite("sprites/text.png") base(Targetname, Target) size(-16 -16 -16, 16 16 16) = game_text : "HUD Text Message"
+[
+	message(string) : "Message Text"
+	x(string) : "X (0 - 1.0 = left to right) (-1 centers)" : "-1"
+	y(string) : "Y (0 - 1.0 = top to bottom) (-1 centers)" : "-1"
+	effect(Choices) : "Text Effect" : 0 =
+	[
+		0 : "Fade In/Out"
+	]
+	color(color255) : "Color" : "100 100 100"
+	fadein(string) : "Fade in Time" : "1.5"
+	fadeout(string) : "Fade Out Time" : "0.5"
+	holdtime(string) : "Hold Time" : "2.0"
+]
+@PointClass iconsprite("sprites/impy.png") size(-32 -32 -32, 32 32 32) color(0 255 0) = impy : "Impy"
+[
+	spawnflags(flags) =
+	[
+		2: "Showcase" : 0
+	]
+]
+@PointClass base(Axis) iconsprite("sprites/turtle.png") size(-32 -32 -16, 32 32 16) color(0 255 0) = lava_turtle : "Lava Turtle"
+[
+	speed(integer) : "Speed" : 5
+	spawnflags(Flags) = [ 1 : "Showcase" : 0 ]
+]
+@PointClass base(Targetname) size(-128 -32 -128, 128 0 128) color(255 128 128) = level_end : "Level End"
+[
+	next_level(string) : "Next Level"
+]
+@PointClass iconsprite("sprites/lightbulb.png") size(-8 -8 -8, 8 8 8) base(Targetname, RGBColor, Vector3) color(255 255 0) = light_directional : "Directional light"
+[
+	spawnflags(Flags) = [ 1 : "Initially dark" : 0 ]
+	_range(integer) : "Range" : 300
+]
+@PointClass iconsprite("sprites/lightbulb.png") size(-8 -8 -8, 8 8 8) base(Targetname, RGBColor) color(255 255 0) = light_point : "Point light"
+[
+	spawnflags(Flags) = [ 1 : "Initially dark" : 0 ]
+	_range(integer) : "Range" : 300
+]
+@PointClass iconsprite("sprites/lightbulb.png") size(-8 -8 -8, 8 8 8) base(Targetname, RGBColor, Vector3) color(255 255 0) = light_spot : "Spot light"
+[
+	spawnflags(Flags) = [ 1 : "Initially dark" : 0 ]
+	_range(integer) : "Range" : 300
+	_cone1(integer) : "Inner Radius" : 32
+	_cone2(integer) : "Outer Radius" : 64
+	
+]
+@PointClass iconsprite("sprites/torch.png") size(-8 -8 -8, 8 8 8) base(light_point, BackwardsAxis) color(255 255 0) = light_torch : "Torch light"
+[
+	flicker_type(Choices) : "Flicker Type" : 1 =
+	[
+		1 : "Normal"
+		2 : "Pop"
+	]
+]
+@PointClass iconsprite("sprites/princess.png") size(-32 -32 -32, 32 32 32) color(255 0 0) = player_respawn : "Player Respawn"
+[
+]
+@PointClass base(Axis) iconsprite("sprites/wallyred.png") size(-64 -64 -128, 64 64 128) color(255 0 0) = red_portal : "Red Portal"
+[
+]
+
