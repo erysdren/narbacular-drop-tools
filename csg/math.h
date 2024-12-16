@@ -193,14 +193,14 @@ public:
 
 		if ( Distance > epsilon )
 		{
-			return eCP::FRONT;
+			return FRONT;
 		}
 		else if ( Distance < -epsilon )
 		{
-			return eCP::BACK;
+			return BACK;
 		}
 
-		return eCP::ONPLANE;
+		return ONPLANE;
 	}
 
 	bool GetIntersection ( const Plane &a, const Plane &b, Vector3 &v )
