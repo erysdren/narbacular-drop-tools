@@ -59,6 +59,7 @@ private:
 	Result ParseFace ( Face **ppFace_ );
 	Result ParseVector ( Vector3 &v_ );
 	Result ParsePlane ( Plane &p_ );
+	Result ParseComment ( );
 
 public:
 	bool Load ( char *pcFile_, Entity **ppEntities_, Texture **pTexture_ );

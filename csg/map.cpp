@@ -17,6 +17,26 @@ using namespace std;
 #include "map.h"
 #include "WAD3.h"
 
+MAPFile::Result MAPFile::ParseComment ( )
+{
+	while ( true )
+	{
+		char	c		= 0;
+		DWORD	dwRead	= 0;
+
+		if ( ReadFile ( m_hFile, &c, 1, &dwRead, NULL ) == FALSE )
+		{
+			cout << "File read error!" << endl;
+
+			return RESULT_FAIL;
+		}
+
+		if (c == '\n' || c == '\r')
+			break;
+	}
+
+	return RESULT_SUCCEED;
+}
 
 MAPFile::Result MAPFile::ParseEntity ( Entity **ppEntity_ )
 {
@@ -35,14 +55,18 @@ MAPFile::Result MAPFile::ParseEntity ( Entity **ppEntity_ )
 	// Read {
 	//
 	Result	result = GetToken ( );
+	if ( result != RESULT_SUCCEED )
+		return result;
 
-	if ( result == RESULT_EOF )
+	while ( strcmp ( "//", m_acToken ) == 0 )
 	{
-		return RESULT_EOF;
-	}
-	else if ( result == RESULT_FAIL )
-	{
-		return RESULT_FAIL;
+		result = ParseComment ( );
+		if ( result != RESULT_SUCCEED )
+			return result;
+
+		result = GetToken ( );
+		if ( result != RESULT_SUCCEED )
+			return result;
 	}
 
 	if ( strcmp ( "{", m_acToken ) != 0 )
@@ -92,7 +116,7 @@ MAPFile::Result MAPFile::ParseEntity ( Entity **ppEntity_ )
 
 			pEntity->AddProperty ( pProperty );
 		}
-		else if ( c == '{' )
+		else if ( c == '{' || c == '/' )
 		{	// Brush
 			Brush *pBrush = NULL;
 
@@ -392,6 +416,7 @@ MAPFile::Result MAPFile::ParseFace ( Face **ppFace_ )
 
 	pFace->texScale [ 1 ] = atof ( m_acToken ) / scale;
 
+#if 0
 	result = GetToken ( );
 
 	if ( result != RESULT_SUCCEED )
@@ -403,6 +428,7 @@ MAPFile::Result MAPFile::ParseFace ( Face **ppFace_ )
 
 		return RESULT_FAIL;
 	}
+#endif
 
 	*ppFace_ = pFace;
 
@@ -424,13 +450,19 @@ MAPFile::Result MAPFile::ParseBrush ( Brush **ppBrush_ )
 	//
 	// Read {
 	//
-	Result result = GetToken ( );
-
+	Result	result = GetToken ( );
 	if ( result != RESULT_SUCCEED )
-	{
-		cout << "Error reading brush!" << endl;
+		return result;
 
-		return RESULT_FAIL;
+	while ( strcmp ( "//", m_acToken ) == 0 )
+	{
+		result = ParseComment ( );
+		if ( result != RESULT_SUCCEED )
+			return result;
+
+		result = GetToken ( );
+		if ( result != RESULT_SUCCEED )
+			return result;
 	}
 
 	if ( strcmp ( "{", m_acToken ) )
