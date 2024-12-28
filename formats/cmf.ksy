@@ -9,14 +9,14 @@ seq:
     contents: "CMF"
   - id: version
     type: s1
-  - id: thing_width
+  - id: preview_width
     type: u4
     if: version > 2
-  - id: thing_height
+  - id: preview_height
     type: u4
     if: version > 2
-  - id: thing_data
-    size: thing_width * thing_height * 4
+  - id: preview_data
+    size: preview_width * preview_height * 4
     if: version > 2
   - id: num_wads
     type: u4
