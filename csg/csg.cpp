@@ -50,7 +50,17 @@ Header:
 	//
 	// Write header ID and version
 	//
-	ofsFile << "CMF" << ( char )2;
+	ofsFile << "CMF" << ( char )3;
+
+	//
+	// erysdren: write a dummy preview
+	//
+	unsigned int	previewWidth	= 128;
+	unsigned int	previewHeight	= 128;
+	unsigned char	preview[128 * 128 * 4];
+	ofsFile.write ( ( char * )&previewWidth, sizeof ( previewWidth ) );
+	ofsFile.write ( ( char * )&previewHeight, sizeof ( previewHeight ) );
+	ofsFile.write ( ( char * )preview, sizeof ( preview ) );
 
 	//
 	// Find "wad" property
