@@ -1,8 +1,12 @@
 meta:
   id: ore
+  title: Narbacular Drop Archive
+  application: Narbacular Drop
   file-extension: ore
   endian: le
-  bit-endian: le
+
+doc: |
+  The archive format used by Narbacular Drop (2005).
 
 seq:
   - id: header_size
@@ -27,14 +31,14 @@ types:
       - id: name
         type: strz
         encoding: ascii
-      - id: offset
+      - id: ofs_data
         type: s4
-      - id: size
+      - id: len_data
         type: s4
     instances:
       data:
-        pos: _parent._parent.offset + offset + 8
-        size: size
+        pos: _parent._parent.offset + ofs_data + 8
+        size: len_data
 
   file_list:
     seq:
@@ -65,11 +69,11 @@ types:
       - id: name
         type: strz
         encoding: ascii
-      - id: offset
+      - id: ofs_data
         type: s4
-      - id: size
+      - id: len_data
         type: s4
     instances:
       data:
-        pos: _root.header_size + offset
-        size: size
+        pos: _root.header_size + ofs_data
+        size: len_data
