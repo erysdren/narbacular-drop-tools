@@ -1,14 +1,19 @@
 meta:
-  id: cmf
+  id: narbaculardrop_cmf
   title: Narbacular Drop Level
   application: Narbacular Drop
   file-extension: cmf
+  license: CC0-1.0
   endian: le
 
 doc: |
   The level format used by Narbacular Drop (2005). The format was originally
   created by Stefan Hajnoczi in 2001 as part of an online tutorial for parsing
-  Quake MAP file in C++.
+  Quake MAP file in C++. Version 2 of the format added a preview bitmap in the
+  header.
+
+  This specification was authored by erysdren (it/its).
+  https://erysdren.me/
 
 seq:
   - id: magic

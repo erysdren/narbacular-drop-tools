@@ -1,12 +1,19 @@
 meta:
-  id: ore
+  id: narbaculardrop_ore
   title: Narbacular Drop Archive
   application: Narbacular Drop
   file-extension: ore
+  license: CC0-1.0
   endian: le
 
 doc: |
-  The archive format used by Narbacular Drop (2005).
+  The archive format used by Narbacular Drop (2005). The format is made up of
+  "directories" which contain named files and "loose files" which sit above the
+  directories. The files contained are uncompressed. Only one layer of
+  directories seems to be supported.
+
+  This specification was authored by erysdren (it/its).
+  https://erysdren.me/
 
 seq:
   - id: header_size
